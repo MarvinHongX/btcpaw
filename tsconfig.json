@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "maxNodeModuleJsDepth": 10,
+    "declaration": false,
+    "strict": false,                        // Disable all strict type checking options
+    "noImplicitAny": false,                 // Allow implicit 'any' types
+    "strictNullChecks": false,              // Allow null and undefined
+    "noImplicitThis": false,                // Allow implicit 'this' type
+    "strictFunctionTypes": false,           // Less strict function types
+    "strictPropertyInitialization": false,  // Allow class properties to be uninitialized
+    "esModuleInterop": true,                // Enable default import interoperability
+    "skipLibCheck": true,                   // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true
+  },
+    "extends": "./.nuxt/tsconfig.json"
+}
