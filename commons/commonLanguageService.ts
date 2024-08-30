@@ -169,9 +169,13 @@ export const getLabels = (selectedLanguage: Ref<Language>): Record<string, strin
             ENG: 'Network',
             KOR: '네트워크'
         },
+        networkHashrate: {
+            ENG: 'Network Hashrate',
+            KOR: '네트워크 해시레이트'
+        },
         networkMiners: {
             ENG: 'Network Miners',
-            KOR: '네트워크 채굴자들'
+            KOR: '네트워크 마이너'
         },
         nextBlockHash: {
             ENG: 'Next Block Hash',

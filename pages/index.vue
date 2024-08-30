@@ -219,13 +219,13 @@ onBeforeUnmount(() => {
         </div>
         <div class="col-12 xl:col-6">
             <div class="card" v-if="!loading16">
-                <h5>Network Hashrate</h5>
+                <h5 v-if="!loadingState">{{ labels.networkHashrate }}</h5>
                 <Chart type="line" :data="networkHashRate" />
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card" v-if="!loading17">
-                <h5>Network Pools</h5>
+                <h5 v-if="!loadingState">{{ labels.networkMiners }}</h5>
                 <Chart type="doughnut" :data="networkPools"/>
             </div>
         </div>
