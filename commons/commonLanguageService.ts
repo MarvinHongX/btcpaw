@@ -27,7 +27,7 @@ export const getSentences = (selectedLanguage: Ref<Language>): Record<string, st
         },
         searchBy: {
             ENG: 'Search by Block / Hash / Transaction / Address',
-            KOR: '블록 / Hash / 트랜잭션 / 주소 로 검색하세요.'
+            KOR: '블록 / 해시 / 트랜잭션 / 주소 로 검색하세요.'
         },
         searchResults: {
             ENG: 'Search Results',
