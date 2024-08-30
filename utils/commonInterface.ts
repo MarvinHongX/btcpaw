@@ -149,7 +149,6 @@ export interface Members {
 
 export interface BtcInfo {
     hashRate: number;
-    difficulty: string;
 }
 
 export interface Prover {

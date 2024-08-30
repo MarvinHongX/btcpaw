@@ -25,9 +25,9 @@ onMounted(() => {
 
 
 </script>
-
 <template>
     <div class="grid">
+        
         <div class="col-12">
             <div class="card">
                 <div class="flex align-items-center justify-content-between mb-4">
@@ -35,24 +35,25 @@ onMounted(() => {
                 </div>
                 <div class="flex flex-row">
                     <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.transactionId }}</span>
-                    <span class="text-900 line-height-3" v-if="!loading7">
+                    <span class="text-900 line-height-3">
                         <div class="data-non-shorten-950">
-                            {{ transaction?.txid }}
+                            {{ transactionId }}
+                            <!-- {{ transaction?.txid }} -->
                         </div>
                         <div class="data-shorten-950 data-non-shorten-650">
-                            {{ shortenStr(transaction?.txid ?? '', 25, 25) }}
+                            {{ shortenStr(transactionId ?? '', 25, 25) }}
                         </div> 
                         <div class="data-shorten-650 data-non-shorten-600">
-                            {{ shortenStr(transaction?.txid ?? '', 22, 20) }}
+                            {{ shortenStr(transactionId ?? '', 22, 20) }}
                         </div> 
                         <div class="data-shorten-600 data-non-shorten-500">
-                            {{ shortenStr(transaction?.txid ?? '', 15, 15) }}
+                            {{ shortenStr(transactionId ?? '', 15, 15) }}
                         </div> 
                         <div class="data-shorten-500 data-non-shorten-400">
-                            {{ shortenStr(transaction?.txid ?? '', 12, 12) }}
+                            {{ shortenStr(transactionId ?? '', 12, 12) }}
                         </div> 
                         <div class="data-shorten-400">
-                            {{ shortenStr(transaction?.txid ?? '', 8, 8) }}
+                            {{ shortenStr(transactionId ?? '', 8, 8) }}
                         </div> 
                     </span>
                 </div>
@@ -115,18 +116,19 @@ onMounted(() => {
 
             <div class="card">
                 <div class="flex align-items-center justify-content-between mb-4">
-                    <span class="text-900 line-height-3" v-if="!loading7">
+                    <span class="text-900 line-height-3">
                         <div class="data-non-shorten-600">
-                            {{ transaction?.txid }}
+                            {{ transactionId }}
+                            <!-- {{ transaction?.txid }} -->
                         </div>
                         <div class="data-shorten-600 data-non-shorten-500">
-                            {{ shortenStr(transaction?.txid ?? '', 28, 28) }}
+                            {{ shortenStr(transactionId ?? '', 28, 28) }}
                         </div> 
                         <div class="data-shorten-500 data-non-shorten-400">
-                            {{ shortenStr(transaction?.txid ?? '', 22, 22) }}
+                            {{ shortenStr(transactionId ?? '', 22, 22) }}
                         </div> 
                         <div class="data-shorten-400">
-                            {{ shortenStr(transaction?.txid ?? '', 14, 14) }}
+                            {{ shortenStr(transactionId ?? '', 14, 14) }}
                         </div> 
                     </span>
                 </div>

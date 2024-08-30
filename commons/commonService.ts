@@ -290,6 +290,7 @@ export const getAccount = (
 
 
 export const getBtcInfo = (
+    loading18: Ref<boolean>, 
     btcInfo: Ref<BtcInfo | null>
 ): void => {
     $fetch(`/api/info/hashrate`)
@@ -302,22 +303,11 @@ export const getBtcInfo = (
 
             btcInfo.value = {
                 hashRate,
-                difficulty: '',
             };
+            if (loading18.value) loading18.value = false;
         })
         .catch(error => {
             console.error('Error fetching hashrate:', error);
             return false;
         });
-
-    $fetch('/api/info/difficulty')
-        .then((response: any) => {
-            if (btcInfo.value) {
-                btcInfo.value.difficulty = response;
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching difficulty:', error);
-        });        
-
 };

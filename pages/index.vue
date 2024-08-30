@@ -9,6 +9,7 @@ const loading2 = ref<boolean>(true);
 const loading3 = ref<boolean>(true);
 const loading16 = ref<boolean>(true);
 const loading17 = ref<boolean>(true);
+const loading18 = ref<boolean>(true);
 const latestBlock = ref<Block | null>(null); 
 const transactions = ref<Transaction[]>([]);
 const blocks = ref<Block[]>([]);
@@ -64,7 +65,7 @@ const intervalAction = () => {
 }
 
 onMounted(() => {
-    getBtcInfo(btcInfo);
+    getBtcInfo(loading18, btcInfo);
     intervalAction();
     getNetworkHashRate(loading16, networkHashRate);
     getNetworkPools(loading17, networkPools);
@@ -108,7 +109,7 @@ onBeforeUnmount(() => {
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3" v-if="!loadingState">{{ labels.hashrate }}</span>
-                        <div class="text-900 font-medium text-xl" v-if="!loading1"
+                        <div class="text-900 font-medium text-xl" v-if="!loading18"
                             >{{ btcInfo?.hashRate.toLocaleString() }}
                         </div>
                     </div>
@@ -121,7 +122,7 @@ onBeforeUnmount(() => {
                     <div>
                         <span class="block text-500 font-medium mb-3" v-if="!loadingState">{{ labels.difficulty }}</span>
                         <div class="text-900 font-medium text-xl" v-if="!loading1"
-                            >{{ btcInfo?.difficulty && toBtcDifficulty(btcInfo?.difficulty) }}
+                            >{{ latestBlock?.difficulty.toLocaleString() }}
                         </div>
                     </div>
                 </div>
@@ -217,15 +218,15 @@ onBeforeUnmount(() => {
             </div>
         </div>
         <div class="col-12 xl:col-6">
-            <div class="card">
+            <div class="card" v-if="!loading16">
                 <h5>Network Hashrate</h5>
-                <Chart type="line" :data="networkHashRate" v-if="!loading16"/>
+                <Chart type="line" :data="networkHashRate" />
             </div>
         </div>
         <div class="col-12 xl:col-6">
-            <div class="card">
+            <div class="card" v-if="!loading17">
                 <h5>Network Pools</h5>
-                <Chart type="doughnut" :data="networkPools" v-if="!loading17"/>
+                <Chart type="doughnut" :data="networkPools"/>
             </div>
         </div>
 
@@ -236,7 +237,7 @@ onBeforeUnmount(() => {
                 v-if="!loadingState"
             >
                 <div class="flex flex-column">
-                    <img :src="skyzoneUrl" alt="skyzone" height="100" class="mr-2" />
+                    <img :src="skyzoneUrl" alt="skyzone" height="90" class="mr-2" />
                 </div>
                 <div class="px-4 py-4 flex flex-row justify-content-center">
                     <a href="https://theskyzone.net" target="_blank" class="p-button font-bold px-5 py-3 p-button-warning p-button-rounded p-button-raised"> {{ labels.getStarted}} </a>
@@ -246,14 +247,14 @@ onBeforeUnmount(() => {
         <div class="col-12 xl:col-6">
             <div
                 class="px-4 py-5 shadow-2 flex flex-column md:flex-row md:align-items-center justify-content-between mb-3"
-                style="border-radius: 1rem;"
+                style="border-radius: 1rem; background-color:#f3f2e9;"
                 v-if="!loadingState"
             >
                 <div class="flex flex-column">
-                    <img :src="aleocatUrl" alt="aleocat" height="100" class="mr-2" />
+                    <img :src="aleocatUrl" alt="aleocat" height="90" class="mr-2" />
                 </div>
                 <div class="px-4 py-4 flex flex-row justify-content-center">
-                    <a href="https://aleocat.com" target="_blank" class="p-button font-bold px-5 py-3 p-button-warning p-button-rounded p-button-raised"> {{ labels.getStarted}} </a>
+                    <a href="https://aleocat.com" target="_blank" class="p-button font-bold px-5 py-3 p-button-info p-button-rounded p-button-raised"> {{ labels.getStarted}} </a>
                 </div>
             </div>
         </div>

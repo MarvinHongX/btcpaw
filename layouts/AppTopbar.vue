@@ -75,7 +75,7 @@ onBeforeUnmount(() => {
             <div class="layout-topbar-top">
                 <div class="layout-topbar-top-logo">
                     <router-link to="/" class="layout-topbar-logo">
-                        <img :src="logoUrl" alt="logo" />
+                        <img :src="logoUrl" width="50" alt="logo" />
                         <span class="layout-topbar-logo-name"><span class="btc">BTC</span><span class="paw">PAW</span></span>
                     </router-link>
                 </div>

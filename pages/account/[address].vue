@@ -35,24 +35,24 @@ onMounted(() => {
                 </div>
                 <div class="flex flex-row">
                     <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.address }}</span>
-                    <span class="text-900 line-height-3" v-if="!loading10">
+                    <span class="text-900 line-height-3">
                         <div class="data-non-shorten-950">
-                            {{ account?.validateaddress.address }}
+                            {{ address }}
                         </div>
                         <div class="data-shorten-950 data-non-shorten-650">
-                            {{ shortenStr(account?.validateaddress.address ?? '', 25, 25) }}
+                            {{ shortenStr(address ?? '', 25, 25) }}
                         </div> 
                         <div class="data-shorten-650 data-non-shorten-600">
-                            {{ shortenStr(account?.validateaddress.address ?? '', 22, 20) }}
+                            {{ shortenStr(address ?? '', 22, 20) }}
                         </div> 
                         <div class="data-shorten-600 data-non-shorten-500">
-                            {{ shortenStr(account?.validateaddress.address ?? '', 15, 15) }}
+                            {{ shortenStr(address ?? '', 15, 15) }}
                         </div> 
                         <div class="data-shorten-500 data-non-shorten-400">
-                            {{ shortenStr(account?.validateaddress.address ?? '', 12, 12) }}
+                            {{ shortenStr(address ?? '', 12, 12) }}
                         </div> 
                         <div class="data-shorten-400">
-                            {{ shortenStr(account?.validateaddress.address ?? '', 8, 8) }}
+                            {{ shortenStr(address ?? '', 8, 8) }}
                         </div> 
                     </span>
                 </div>
