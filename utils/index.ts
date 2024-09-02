@@ -243,3 +243,17 @@ export const shortenNum = (num: number): string => {
         return formatNumberWithCommas(num);
     }
 };
+
+
+export const toBtcScale = (value: string | number | undefined, fractionDigits: number = 8): string => {
+    let result: number = 0;
+
+    if (typeof value === 'string') {
+        result = parseInt(value, 10);
+    } else {
+        result = value as number;
+    }
+
+    const scaledResult: string = (result / 100000000.0).toFixed(fractionDigits);
+    return Number(scaledResult).toLocaleString(undefined, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits });
+};

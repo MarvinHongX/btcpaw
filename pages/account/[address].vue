@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getAccount } from '@/commons/commonService';
+import { getBtcPrice, getAccount } from '@/commons/commonService';
 
 const loading10 = ref<boolean>(true);
 const address = ref<string>('');
 const account = ref<Account | null>(null);
+
+const loading12 = ref<boolean>(true);
+const btcPrice = ref<number>(0);
+const btcPriceChangePercentage = ref<number>(0);
 
 const route = useRoute();
 const labels = useLabels();
@@ -15,12 +19,14 @@ watch(() => route.params.address, (newValue, oldValue) => {
     if (newValue !== oldValue) {
         address.value = newValue.toString();
         getAccount(address, loading10, account);
+        getBtcPrice(btcPrice, btcPriceChangePercentage, loading12);
     }
 });
 
 onMounted(() => {
     address.value = route.params.address.toString();
     getAccount(address, loading10, account);
+    getBtcPrice(btcPrice, btcPriceChangePercentage, loading12);
 });
 
 
@@ -58,7 +64,11 @@ onMounted(() => {
                 </div>
                 <div class="flex flex-row">
                     <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.balance }}</span>
-                    <span class="text-900 line-height-3" v-if="!loading10">{{ account?.txHistory.balanceSat.toLocaleString() }} BTC</span>
+                    <span class="text-900 line-height-3" v-if="!loading10">{{ toBtcScale(account?.txHistory.balanceSat) }} BTC</span>
+                </div>
+                <div class="flex flex-row">
+                    <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.estimatedValue }}</span>
+                    <span class="text-900 line-height-3" v-if="!loading10 && !loading12"> $ {{ toBtcScale(account?.txHistory.balanceSat * btcPrice, 2) }}</span>
                 </div>
             </div>
             <!-- Card for each transaction -->

@@ -105,6 +105,10 @@ export const getLabels = (selectedLanguage: Ref<Language>): Record<string, strin
             ENG: 'Epoch',
             KOR: '에폭'
         },
+        estimatedValue: {
+            ENG: 'Estimated Value',
+            KOR: '추정 가치'
+        },
         fee: {
             ENG: 'Fee',
             KOR: '비용'
@@ -148,10 +152,6 @@ export const getLabels = (selectedLanguage: Ref<Language>): Record<string, strin
         latestTransactions: {
             ENG: 'Latest Transactions',
             KOR: '최신 트랜잭션들'
-        },
-        latestTransitions: {
-            ENG: 'Latest Transitions',
-            KOR: '최신 트랜지션들'     
         },
         loading: {
             ENG: 'Loading ...',
@@ -216,10 +216,6 @@ export const getLabels = (selectedLanguage: Ref<Language>): Record<string, strin
         rank: {
             ENG: 'Rank',
             KOR: '순위'
-        },
-        reward: {
-            ENG: 'Reward',
-            KOR: '보상'
         },
         round: {
             ENG: 'Round',
