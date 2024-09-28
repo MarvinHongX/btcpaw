@@ -5,6 +5,10 @@ Visit [BTC PAW](https://btcpaw.com) Bitcoin explore.
 ## Setup
 
 ```bash
+nvm install 20.11.1
+```
+
+```bash
 npm install
 ```
 

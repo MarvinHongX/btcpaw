@@ -10,10 +10,23 @@ const account = ref<Account | null>(null);
 const loading12 = ref<boolean>(true);
 const btcPrice = ref<number>(0);
 const btcPriceChangePercentage = ref<number>(0);
+const copied = ref<boolean>(false);
 
 const route = useRoute();
 const labels = useLabels();
 const loadingState = useLoadingState();
+
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(address.value);
+    copied.value = true;
+    setTimeout(() => {
+        copied.value = false;
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+};
 
 watch(() => route.params.address, (newValue, oldValue) => {
     if (newValue !== oldValue) {
@@ -61,6 +74,27 @@ onMounted(() => {
                             {{ shortenStr(address ?? '', 8, 8) }}
                         </div> 
                     </span>
+                    <template v-if="!copied">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="ml-2 cursor-pointer"
+                            @click="copyToClipboard"
+                        >
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                    </template>
+                    <template v-else>
+                        <span  class="text-900 line-height-3">&nbsp;&nbsp;Copied!</span>
+                    </template>
                 </div>
                 <div class="flex flex-row">
                     <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.balance }}</span>
