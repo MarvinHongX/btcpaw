@@ -5,8 +5,12 @@ export const getBtcPrice = (
 ): void => {
     $fetch('/api/price')
         .then((response: any) => {
-            btcPrice.value = response.quotes.USD.price;
-            btcPriceChangePercentage.value = response.quotes.USD.market_cap_change_24h;
+            const openPrice = parseFloat(response.open);
+            const lastPrice = parseFloat(response.last);
+
+            btcPrice.value = lastPrice;
+            btcPriceChangePercentage.value = ((lastPrice - openPrice) / openPrice) * 100;
+            
             if (loading12.value) loading12.value = false;
         })
         .catch(error => {
