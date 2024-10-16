@@ -76,35 +76,37 @@ onBeforeUnmount(() => {
                 <div class="layout-topbar-top-logo">
                     <router-link to="/" class="layout-topbar-logo">
                         <img :src="logoUrl" width="35" alt="logo" />
-                        <!-- <span class="layout-topbar-logo-name"><span class="btc">BTC</span><span class="paw">PAW</span></span> -->
+                        <span class="layout-topbar-logo-name"><span class="btc">BTC</span><span class="paw">PAW</span></span>
                     </router-link>
                 </div>
-                <div class="layout-topbar-top-info">
-                    <div class="flex flex-row">
-                        <div class="layout-topbar-price">
-                            <img :src="bitcoinUrl" alt="bitcoinLogo" />
-                            <span class="text-lg font-bold mr-2" v-if="!loading12"
-                                >$&nbsp;{{ btcPrice.toLocaleString(undefined, {maximumFractionDigits: 2}) }}
-                            </span>
-                            <span :class="{ 'text-green-500 text-sm font-semibold': btcPriceChangePercentage > 0, 'text-red-500 text-sm font-semibold': btcPriceChangePercentage < 0 }" v-if="!loading12"
-                                >&nbsp;{{ btcPriceChangePercentage > 0 ? '+' : '' }}{{ btcPriceChangePercentage.toLocaleString(undefined, {maximumFractionDigits: 2}) }}%
-                            </span>                        
+                <div class="layout-topbar-top-wrapper">
+                    <div class="layout-topbar-top-info">
+                        <div class="flex flex-row">
+                            <div class="layout-topbar-price">
+                                <img :src="bitcoinUrl" alt="bitcoinLogo" />
+                                <span class="text-lg font-bold mr-2" v-if="!loading12"
+                                    >$&nbsp;{{ btcPrice.toLocaleString(undefined, {maximumFractionDigits: 2}) }}
+                                </span>
+                                <span :class="{ 'text-green-500 text-sm font-semibold': btcPriceChangePercentage > 0, 'text-red-500 text-sm font-semibold': btcPriceChangePercentage < 0 }" v-if="!loading12"
+                                    >&nbsp;{{ btcPriceChangePercentage > 0 ? '+' : '' }}{{ btcPriceChangePercentage.toLocaleString(undefined, {maximumFractionDigits: 2}) }}%
+                                </span>                        
+                            </div>
                         </div>
-                    </div>
-                </div>  
-                <div class="layout-topbar-top-setting">
-                    <div v-if="darkTheme && (darkTheme === true)" class="flex flex-row">
-                        <button class="p-link w-2rem h-2rem" @click="onChangeTheme('md-light-indigo', false)">
-                            <img :src="darkModeUrl" class="w-2rem h-2rem" alt="Material Dark Indigo" />
-                        </button>
-                    </div>
-                    <div v-else class="flex flex-row">
-                        <button class="p-link w-2rem h-2rem" @click="onChangeTheme('md-dark-indigo', true)">
-                            <img :src="lightModeUrl" class="w-2rem h-2rem" alt="Material Light Indigo" />
-                        </button>
-                    </div>
-                    <div class="flex flex-row">
-                        <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="name" />
+                    </div>  
+                    <div class="layout-topbar-top-setting">
+                        <div v-if="darkTheme && (darkTheme === true)" class="flex flex-row">
+                            <button class="p-link w-2rem h-2rem" @click="onChangeTheme('md-light-indigo', false)">
+                                <img :src="darkModeUrl" class="w-2rem h-2rem" alt="Material Dark Indigo" />
+                            </button>
+                        </div>
+                        <div v-else class="flex flex-row">
+                            <button class="p-link w-2rem h-2rem" @click="onChangeTheme('md-dark-indigo', true)">
+                                <img :src="lightModeUrl" class="w-2rem h-2rem" alt="Material Light Indigo" />
+                            </button>
+                        </div>
+                        <div class="flex flex-row">
+                            <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="name" />
+                        </div>
                     </div>
                 </div>
             </div>

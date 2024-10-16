@@ -23,7 +23,7 @@ export const getLatestBlockAndSaveToLocalStorage = (
     key: string
 ): Promise<boolean> => {
     return $fetch('/api/block/latest')
-        .then((response: any) => {
+        .then((response: any) => {            
             localStorage.setItem(key, JSON.stringify(response));
             return true;
         })
@@ -61,7 +61,7 @@ export const getLatestBlocks = (
     const end: number = totalRecords - ((currentPage - 1) * pageSize);
 
     if (start && end) {
-        $fetch(`/api/lightblocks?start=${start}&end=${end}`)
+        $fetch(`/api/blocks?start=${start}&end=${end}`)
             .then((response: any[]) => {
                 response.sort((a: any, b: any) => b.height - a.height);
                 blocks.value = response;
@@ -109,7 +109,7 @@ export const fetchBlocksForPage = (tableParams: Ref<TableParams>, loading2: Ref<
     const end: number = totalRecords - ((currentPage - 1) * pageSize);
 
     if (start && end) {
-        $fetch(`/api/lightblocks?start=${start}&end=${end}`)
+        $fetch(`/api/blocks?start=${start}&end=${end}`)
             .then((response: any) => {
                 response.sort((a: any, b: any) => b.height - a.height);
                 blocks.value = response;

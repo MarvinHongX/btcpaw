@@ -1,9 +1,16 @@
 export default defineEventHandler(async (event: any) => {
-    const config  = useRuntimeConfig();
-    const apiBase: string = config.public.apiBase3;
     const heightOrHash: string = event.context.params.heightOrHash;
-    const url: string = `${apiBase}/block/${heightOrHash}`;
-    const response: any = await $fetch(url);
 
-    return response;
-})
+    let blockHash: string;
+
+    if (!isNaN(Number(heightOrHash))) {
+        const blockHashResponse: any = await rpcRequest("getblockhash", [Number(heightOrHash)]);
+        blockHash = blockHashResponse.result;
+    } else {
+        blockHash = heightOrHash;
+    }
+
+    const response: any = await rpcRequest("getblock", [blockHash]);
+
+    return response.result;
+});

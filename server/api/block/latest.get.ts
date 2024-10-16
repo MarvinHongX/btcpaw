@@ -1,13 +1,11 @@
 export default defineEventHandler(async (event: any) => {
-    const config = useRuntimeConfig();
-    const apiBase: string = config.public.apiBase3;
-    const tipUrl: string = `${apiBase}/blocks/tip`;
-    
-    const initialResponse: any = await $fetch(tipUrl);
-    const height: number = initialResponse.height;
-    
-    const url: string = `${apiBase}/block/${height}`;
-    const response: any = await $fetch(url);
-    
-    return response;
+    const blockchainInfo: any = await rpcRequest("getblockchaininfo");
+    const latestBlockHeight = blockchainInfo.result?.blocks;
+
+    const blockHashResponse: any = await rpcRequest("getblockhash", [latestBlockHeight]);
+    const latestBlockHash = blockHashResponse.result;
+
+    const response: any = await rpcRequest("getblock", [latestBlockHash]);
+
+    return response.result;
 });

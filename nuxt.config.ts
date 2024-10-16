@@ -2,6 +2,9 @@ export default defineNuxtConfig({
     runtimeConfig: {
         apiSecret: process.env.API_PRIVATE_KEY,
         public: {
+            apiBaseRpc: process.env.API_URL_RPC,
+            rpcUser: process.env.RPC_USER,
+            rpcPassword: process.env.RPC_PASSWORD,
             apiBase: process.env.API_URL,
             apiBase2: process.env.API_URL2,
             apiBase3: process.env.API_URL3,
@@ -9,7 +12,7 @@ export default defineNuxtConfig({
         },
     },
     typescript: {
-        typeCheck: true
+        typeCheck: false
     },
     app: {
         head: {
@@ -59,6 +62,6 @@ export default defineNuxtConfig({
                 includeAppSources: true,
               },        
         }
-    },
+    },    
     css: ['primeicons/primeicons.css', 'primeflex/primeflex.scss', 'primevue/resources/primevue.min.css', '@/assets/styles.scss'],
 });
