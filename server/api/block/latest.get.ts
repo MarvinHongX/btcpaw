@@ -1,8 +1,5 @@
 export default defineEventHandler(async (event: any) => {
-    const blockchainInfo: any = await rpcRequest("getblockchaininfo");
-    const latestBlockHeight = blockchainInfo.result?.blocks;
-
-    const blockHashResponse: any = await rpcRequest("getblockhash", [latestBlockHeight]);
+    const blockHashResponse: any = await rpcRequest("getbestblockhash");
     const latestBlockHash = blockHashResponse.result;
 
     const response: any = await rpcRequest("getblock", [latestBlockHash]);
