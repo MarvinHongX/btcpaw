@@ -91,7 +91,6 @@ export interface Transaction {
     size: number;
     weight: number;
     vin: [{
-        coinbase: string;
         txid: string;
         scriptSig: {
             address: string;

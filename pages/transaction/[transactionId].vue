@@ -7,9 +7,24 @@ const loading7 = ref<boolean>(true);
 const transactionId = ref<string>('');
 const transaction = ref<Transaction | null>(null);
 
+const copied = ref<boolean>(false);
+
 const route = useRoute();
 const labels = useLabels();
 const loadingState = useLoadingState();
+
+
+const copyToClipboard = async () => {
+    try {
+        await navigator.clipboard.writeText(transactionId.value);
+        copied.value = true;
+        setTimeout(() => {
+            copied.value = false;
+        }, 2000);
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+};
 
 watch(() => route.params.transactionId, (newValue, oldValue) => {
     if (newValue !== oldValue) {
@@ -27,7 +42,6 @@ onMounted(() => {
 </script>
 <template>
     <div class="grid">
-        
         <div class="col-12">
             <div class="card">
                 <div class="flex align-items-center justify-content-between mb-4">
@@ -38,7 +52,6 @@ onMounted(() => {
                     <span class="text-900 line-height-3">
                         <div class="data-non-shorten-950">
                             {{ transactionId }}
-                            <!-- {{ transaction?.txid }} -->
                         </div>
                         <div class="data-shorten-950 data-non-shorten-650">
                             {{ shortenStr(transactionId ?? '', 25, 25) }}
@@ -56,6 +69,27 @@ onMounted(() => {
                             {{ shortenStr(transactionId ?? '', 8, 8) }}
                         </div> 
                     </span>
+                    <template v-if="!copied">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="ml-2 cursor-pointer"
+                            @click="copyToClipboard"
+                        >
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                    </template>
+                    <template v-else>
+                        <span  class="text-900 line-height-3">&nbsp;&nbsp;Copied!</span>
+                    </template>
                 </div>
                 <div class="flex flex-row">
                     <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.inBlock }}</span>
@@ -107,122 +141,13 @@ onMounted(() => {
                         </template>
                     </span>                    
                 </div>
-                <div class="flex flex-row">
-                    <span class="block text-600 font-medium mb-4 mr-6" v-if="!loadingState"> {{ labels.fee }}</span>
-                    <span class="text-900 line-height-3" v-if="!loading7"
-                    >{{ transaction?.fee?.amount.toLocaleString() }} {{ transaction?.fee?.unit }}</span>
-                </div>
             </div>
-
-            <div class="card">
-                <div class="flex align-items-center justify-content-between mb-4">
-                    <span class="text-900 line-height-3">
-                        <div class="data-non-shorten-600">
-                            {{ transactionId }}
-                            <!-- {{ transaction?.txid }} -->
-                        </div>
-                        <div class="data-shorten-600 data-non-shorten-500">
-                            {{ shortenStr(transactionId ?? '', 28, 28) }}
-                        </div> 
-                        <div class="data-shorten-500 data-non-shorten-400">
-                            {{ shortenStr(transactionId ?? '', 22, 22) }}
-                        </div> 
-                        <div class="data-shorten-400">
-                            {{ shortenStr(transactionId ?? '', 14, 14) }}
-                        </div> 
-                    </span>
-                </div>
-                <div class="grid">
-                    <div class="col-12 xl:col-6">
-                        <div class="card">
-                            <div class="flex align-items-center justify-content-between mb-4">
-                                <span class="text-900 line-height-3" v-if="!loadingState"> {{ labels.inputs }} </span>
-                            </div>
-                            <div v-if="!loading7">
-                                <div v-for="(input, index) in transaction?.vin" :key="'input-' + index" class="flex flex-row mb-3">
-                                    <span class="block text-600 font-medium mr-6">{{ input?.coinbase ? 0 : input.value }} BTC</span>
-                                    <template v-if="input?.coinbase">
-                                        <Tag severity='info'>{{ 'coinbase' }}</Tag>
-                                    </template>
-                                    <template v-else>
-                                        <NuxtLink class="text-blue-600" :to="'/transaction/' + input.txid">
-                                            <div class="data-non-shorten-1450">
-                                                {{ input.txid }}
-                                            </div>
-                                            <div class="data-shorten-1450 data-non-shorten-1200">
-                                                {{ shortenStr(input.txid ?? '', 23, 23) }}
-                                            </div> 
-                                            <div class="data-shorten-1200 data-non-shorten-950">
-                                                {{ input.txid }}
-                                            </div> 
-                                            <div class="data-shorten-950 data-non-shorten-650">
-                                                {{ shortenStr(input.txid ?? '', 22, 22) }}
-                                            </div> 
-                                            <div class="data-shorten-650 data-non-shorten-600">
-                                                {{ shortenStr(input.txid ?? '', 19, 19) }}
-                                            </div> 
-                                            <div class="data-shorten-600 data-non-shorten-500">
-                                                {{ shortenStr(input.txid ?? '', 14, 14) }}
-                                            </div> 
-                                            <div class="data-shorten-500 data-non-shorten-400">
-                                                {{ shortenStr(input.txid ?? '', 11, 11) }}
-                                            </div> 
-                                            <div class="data-shorten-400">
-                                                {{ shortenStr(input.txid ?? '', 7, 7) }}
-                                            </div> 
-                                        </NuxtLink>
-                                    </template>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-12 xl:col-6">
-                        <div class="card">
-                            <div class="flex align-items-center justify-content-between mb-4">
-                                <span class="text-900 line-height-3" v-if="!loadingState"> {{ labels.outputs }} </span>
-                            </div>
-                            <div v-if="!loading7">
-                                <div v-for="(output, index) in transaction?.vout" :key="'output-' + index" class="flex flex-row mb-3">
-                                    <span class="block text-600 font-medium mr-6">{{ output.value }} BTC</span>
-                                    <template v-if="output?.scriptPubKey?.address">
-                                        <NuxtLink class="text-blue-600" :to="'/account/' + output.scriptPubKey?.address">
-                                            <div class="data-non-shorten-1450">
-                                                {{ output.scriptPubKey?.address }}
-                                            </div>
-                                            <div class="data-shorten-1450 data-non-shorten-1200">
-                                                {{ shortenStr(output.scriptPubKey?.address ?? '', 23, 23) }}
-                                            </div> 
-                                            <div class="data-shorten-1200 data-non-shorten-950">
-                                                {{ output.scriptPubKey?.address }}
-                                            </div> 
-                                            <div class="data-shorten-950 data-non-shorten-650">
-                                                {{ shortenStr(output.scriptPubKey?.address ?? '', 22, 22) }}
-                                            </div> 
-                                            <div class="data-shorten-650 data-non-shorten-600">
-                                                {{ shortenStr(output.scriptPubKey?.address ?? '', 19, 19) }}
-                                            </div> 
-                                            <div class="data-shorten-600 data-non-shorten-500">
-                                                {{ shortenStr(output.scriptPubKey?.address ?? '', 14, 14) }}
-                                            </div> 
-                                            <div class="data-shorten-500 data-non-shorten-400">
-                                                {{ shortenStr(output.scriptPubKey?.address ?? '', 11, 11) }}
-                                            </div> 
-                                            <div class="data-shorten-400">
-                                                {{ shortenStr(output.scriptPubKey?.address ?? '', 7, 7) }}
-                                            </div> 
-                                        </NuxtLink>
-                                    </template>
-                                    <template v-else>
-                                        <Tag severity='warning'>{{ 'OP_RETURN' }}</Tag>
-                                    </template>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <TransactionDetail
+                :transactionId="transaction?.txid" 
+                :transaction="transaction" 
+                :loadingState="loadingState"
+                :loading="loading7"
+            />
         </div>
     </div>
 </template>

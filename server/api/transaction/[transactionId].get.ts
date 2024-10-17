@@ -1,9 +1,6 @@
-export default defineEventHandler(async (event: any) => {
-    const config  = useRuntimeConfig();
-    const apiBase: string = config.public.apiBase;
+export default defineEventHandler(async (event: any) => {   
     const transactionId: string = event.context.params.transactionId;
-    const url: string = `${apiBase}/tx/${transactionId}`;
-    const response: any = await $fetch(url);
-
-    return response;
+    const response: any = await rpcRequest("getrawtransaction", [transactionId, true]);
+    
+    return response.result;
 })

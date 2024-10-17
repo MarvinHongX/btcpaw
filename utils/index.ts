@@ -270,3 +270,14 @@ export const formatHashRate = (hashRate: number): string => {
 
     return `${hashRate.toFixed(2)} ${units[index]}H/s`;
 };
+
+
+export const calculateTotalVout = (vout: { value?: number }[]): string => {
+    const multiplier = 1e8;
+    const sum = vout?.reduce((accumulator, output) => {
+      return accumulator + (output.value ? output.value * multiplier : 0);
+    }, 0) || 0;
+  
+    return (sum / multiplier).toFixed(8);
+};
+  

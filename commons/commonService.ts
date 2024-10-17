@@ -281,7 +281,7 @@ export const getAccount = (
     if (address.value) {
         const addr: string = address.value;
         $fetch(`/api/account/${addr}`)
-            .then((response: any) => {
+            .then((response: any) => {                
                 account.value = response;
                 if (loading10.value) loading10.value = false;
             })
