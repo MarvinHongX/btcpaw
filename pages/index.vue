@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
                     <div>
                         <span class="block text-500 font-medium mb-3" v-if="!loadingState">{{ labels.hashrate }}</span>
                         <div class="text-900 font-medium text-xl" v-if="!loading18"
-                            >{{ btcInfo?.hashRate.toLocaleString() }}
+                            >{{ formatHashRate(btcInfo?.hashRate) }}
                         </div>
                     </div>
                 </div>

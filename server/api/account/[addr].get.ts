@@ -16,7 +16,7 @@ const fetchWithRetry = async (url: string, retries: number = 5, delay: number = 
 
 export default defineEventHandler(async (event) => {
     const config  = useRuntimeConfig();
-    const apiBase: string = config.public.apiBase3;
+    const apiBase: string = config.public.apiBase;
     const addr: string = event.context.params?.addr || '';
     const url: string = `${apiBase}/address/${addr}`;
 

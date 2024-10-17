@@ -1,6 +1,6 @@
 export const rpcRequest = async (method: string, params: any[] = []): Promise<any> => {
     const config = useRuntimeConfig();
-    const apiBase: string = config.public.apiBaseRpc;
+    const rpcUrl: string = config.public.rpcUrl;
     const rpcUser: string = config.public.rpcUser;
     const rpcPassword: string = config.public.rpcPassword;
 
@@ -11,7 +11,7 @@ export const rpcRequest = async (method: string, params: any[] = []): Promise<an
         params: params
     };
 
-    return await $fetch(apiBase, {
+    return await $fetch(rpcUrl, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {

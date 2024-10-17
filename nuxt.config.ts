@@ -2,12 +2,11 @@ export default defineNuxtConfig({
     runtimeConfig: {
         apiSecret: process.env.API_PRIVATE_KEY,
         public: {
-            apiBaseRpc: process.env.API_URL_RPC,
+            rpcUrl: process.env.RPC_URL,
             rpcUser: process.env.RPC_USER,
             rpcPassword: process.env.RPC_PASSWORD,
             apiBase: process.env.API_URL,
             apiBase2: process.env.API_URL2,
-            apiBase3: process.env.API_URL3,
             apiBasePrice: process.env.API_URL_PRICE,
         },
     },

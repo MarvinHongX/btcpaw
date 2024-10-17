@@ -257,3 +257,16 @@ export const toBtcScale = (value: string | number | undefined, fractionDigits: n
     const scaledResult: string = (result / 100000000.0).toFixed(fractionDigits);
     return Number(scaledResult).toLocaleString(undefined, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits });
 };
+
+
+export const formatHashRate = (hashRate: number): string => {
+    const units: string[] = ['H/s', 'K', 'M', 'G', 'T', 'P', 'E'];
+    let index: number = 0;
+  
+    while (hashRate >= 1000 && index < units.length - 1) {
+        hashRate /= 1000;
+        index++;
+    }
+
+    return `${hashRate.toFixed(2)} ${units[index]}H/s`;
+};
