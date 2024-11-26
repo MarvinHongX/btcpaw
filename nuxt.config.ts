@@ -23,6 +23,7 @@ export default defineNuxtConfig({
               { name: 'viewport', content: 'width=device-width, initial-scale=1' },
               { hid: 'description', name: 'description', content: 'Your Premier Block Explorer and Analytics Platform for Bitcoin' },
               { name: "google-site-verification", content: "fRM5FTZ5bZt5MRpwplDneJwVFNFflKfq-jVZrpXB3kc" },
+              { name: "google-adsense-account", content: "ca-pub-9944647203025348" },
             ],
           script: [
               { src: 'https://www.googletagmanager.com/ns.html?id=GTM-MZNPBKW7' },
