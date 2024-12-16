@@ -41,10 +41,9 @@ export default defineNuxtConfig({
                     `
                 },
                 {
-                    src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+                    src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9944647203025348',
                     async: true,
                     crossorigin: 'anonymous',
-                    'data-ad-client': 'ca-pub-9944647203025348',
                 },
             ],
             link: [
