@@ -1,8 +1,8 @@
 export const rpcRequest = async (method: string, params: any[] = []): Promise<any> => {
     const config = useRuntimeConfig();
-    const rpcUrl: string = config.public.rpcUrl;
-    const rpcUser: string = config.public.rpcUser;
-    const rpcPassword: string = config.public.rpcPassword;
+    const rpcUrl: string = config.rpcUrl as string;
+    const rpcUser: string = config.rpcUser as string;
+    const rpcPassword: string = config.rpcPassword as string;
 
     const body = {
         jsonrpc: "1.0",
