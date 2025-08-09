@@ -17,7 +17,7 @@ const loadingState = useLoadingState();
         </div>
         <div class="layout-footer-sparator"></div>
         <div class="layout-footer-txt">
-            <span class="text-500 font-medium">© 2024 BTCPAW. All rights reserved.</span>
+            <span class="text-500 font-medium">© 2025 BTCPAW. All rights reserved.</span>
         </div>         
     </div>
 </template>

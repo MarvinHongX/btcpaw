@@ -1,37 +1,15 @@
+import logoUrl from '/assets/images/logo.svg';
+import lightLogoUrl from '/assets/images/logo-light.svg';
+import darkModeUrl from '/assets/images/dark-mode-light.svg';
+import lightModeUrl from '/assets/images/light-mode.svg';
+import skyzoneUrl from '/assets/images/skyzone.svg';
+import aleocatUrl from '/assets/images/aleocat.webp';
+import bitcoinUrl from '/assets/images/bitcoin.svg';
+
 const { layoutConfig } = useLayout();
 
 export const useCommonComputed = () => {
-    const darkTheme = computed(() => {
-        return layoutConfig.darkTheme.value !== true ? false : true;
-    });
-    
-    const logoUrl = computed(() => {
-        return `/layout/images/logo.svg`;
-    });
-
-    const lightLogoUrl = computed(() => {
-        return `/layout/images/logo-light.svg`;
-    });
-
-    const darkModeUrl = computed(() => {
-        return `/layout/images/dark-mode-light.svg`;
-    });
-
-    const lightModeUrl = computed(() => {
-        return `/layout/images/light-mode.svg`;
-    });
-
-    const skyzoneUrl = computed(() => {
-        return `/layout/images/skyzone.svg`;
-    });
-
-    const aleocatUrl = computed(() => {
-        return `/layout/images/aleocat.png`;
-    });
-
-    const bitcoinUrl = computed(() => {
-        return `/layout/images/bitcoin.svg`;
-    });
+    const darkTheme = computed(() => layoutConfig.darkTheme.value === true);
 
     return {
         darkTheme,
