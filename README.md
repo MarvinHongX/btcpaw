@@ -5,7 +5,7 @@ Visit [BTC PAW](https://btcpaw.com) Bitcoin explore.
 ## Setup
 
 ```bash
-nvm install 20.11.1
+nvm install 20.19.0
 ```
 
 ```bash
